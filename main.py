@@ -1,38 +1,44 @@
-import requests
+import argparse
+import torch
+from transformers import pipeline
 
 
 def main():
-    model = "qwen2.5-coder:7b"
-    api = "http://localhost:11434/api/generate"
+    model_id = input("Hugging Face model ID: ").strip()
 
-    print(f"Orbit running... {model}")
-    print("Type 'exit' to quit.\n")
+    if not model_id:
+        print("Model ID is required.")
+        return
+
+    print(f"\nLoading model: {model_id}...")
+    print("The first run may download model files.")
+
+    device = 0 if torch.cuda.is_available() else -1
+
+    ai = pipeline(
+        "text-generation",
+        model=model_id,
+        device=device,
+    )
+
+    print("\nOrbit is ready. Type 'exit' to quit.\n")
 
     while True:
         prompt = input("You: ").strip()
 
         if prompt.lower() == "exit":
-            print("Exiting...")
             break
 
         if not prompt:
             continue
 
-        try:
-            response = requests.post(
-                api,
-                json={
-                    "model": model,
-                    "prompt": prompt,
-                    "stream": False,
-                },
-                timeout=300,
-            )
-            response.raise_for_status()
-            print(f"\nOrbit: {response.json()['response']}\n")
+        result = ai(
+            prompt,
+            max_new_tokens=200,
+            return_full_text=False,
+        )
 
-        except requests.RequestException as error:
-            print(f"Could not connect to Ollama: {error}")
+        print(f"\nOrbit: {result[0]['generated_text']}\n")
 
 
 if __name__ == "__main__":
