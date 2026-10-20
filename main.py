@@ -14,21 +14,28 @@ def run_model(model_id):
         model=model_id,
         device=device
     )
-    print(f"Orbit is ready. Type 'exit' to quit.")
+    print("Orbit is ready. Type 'exit' to quit.")
+
     while True:
-        prompt = input("you: ").strip()
+        prompt = input("You: ").strip()
+
         if prompt.lower() == "exit":
             break
+
         if not prompt:
             continue
 
-            result = ai(
-                prompt,
-                max_new_tokens=200,
-                return_full_text=False,
-            )
-            print(f"Orbit: {result[0]['generated_text']}")
+        messages = [
+            {"role": "user", "content": prompt}
+        ]
 
+        result = ai(
+            messages,
+            max_new_tokens=200,
+        )
+
+        answer = result[0]["generated_text"][-1]["content"]
+        print(f"\nOrbit: {answer}\n")
 def list_models():
     cache = scan_cache_dir()
 
@@ -88,6 +95,8 @@ def main():
         run_model(args.model_id)
     elif args.command == "list":
         list_models()
+    elif args.command == "pull":
+        pull_model(args.model_id)
 
 if __name__ == "__main__":
     main()
