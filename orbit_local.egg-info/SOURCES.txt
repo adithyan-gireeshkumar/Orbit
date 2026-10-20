@@ -1,8 +1,0 @@
-main.py
-pyproject.toml
-orbit_local.egg-info/PKG-INFO
-orbit_local.egg-info/SOURCES.txt
-orbit_local.egg-info/dependency_links.txt
-orbit_local.egg-info/entry_points.txt
-orbit_local.egg-info/requires.txt
-orbit_local.egg-info/top_level.txt
