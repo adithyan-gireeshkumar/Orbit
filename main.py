@@ -1,11 +1,32 @@
-from huggingface_hub import snapshot_download
+import requests
 
-model_id = input("Enter your model ID: ").strip()
+def main ():
+    model = "qwen2.5-coder:7b"
+    api = "https://localhost:11434/api/generate"
 
-if not model_id:
-    print("Model ID cannot be empty.")
-else:
-    print(f"Downloading {model_id}...")
-    path = snapshot_download(repo_id=model_id)
+    print(f"Orbit Running... {model}")
+    print("Type 'exit' to quit.")
 
-    print(f"Model downloaded to: {path}")
+    while True:
+        prompt = input("You:").strip()
+
+        if prompt.lower() == "exit":
+            print("Exiting...")
+            break
+
+            if not prompt:
+                continue
+                response = requests.post(
+                    api,
+                    json={
+                        "model" : model,
+                        "prompt" : prompt,
+                        "stream" : False,
+                    },
+                    timeout = 300,
+                )
+                response.raise_for_status()
+                print(f"Orbit: {response.json()['response']}")
+
+                if __name__ == "__main__":
+                    main()
