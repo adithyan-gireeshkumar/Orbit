@@ -1,13 +1,29 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "orbit-local"
 version = "0.1.0"
-description = "A local-first AI model runner"
+description = "A local-first AI model runner powered by Hugging Face"
+readme = "README.md"
 requires-python = ">=3.10"
-dependencies = ["huggingface_hub","transformers","torch"]
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Adithyan Gireeshkumar" }
+]
+keywords = ["local-ai", "huggingface", "llm", "transformers", "cli"]
+dependencies = [
+    "huggingface_hub",
+    "transformers",
+    "torch",
+]
+
+[project.urls]
+Homepage = "https://github.com/adithyan-gireeshkumar/Orbit"
+Repository = "https://github.com/adithyan-gireeshkumar/Orbit"
+Issues = "https://github.com/adithyan-gireeshkumar/Orbit/issues"
 
 [project.scripts]
 orbit = "main:main"
