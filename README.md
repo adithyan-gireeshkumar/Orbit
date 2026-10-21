@@ -38,7 +38,7 @@ pipx install orbit-local
 Download a model:
 
 ```bash
-orbit pull Qwen/Qwen2.5-0.5B-Instruct
+orbit pull "MODEL_NAME"
 ```
 
 List cached models:
@@ -50,7 +50,7 @@ orbit list
 Run a model:
 
 ```bash
-orbit run Qwen/Qwen2.5-0.5B-Instruct
+orbit run "MODEL_NAME"
 ```
 
 Type `exit` to leave the chat.
