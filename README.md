@@ -21,27 +21,13 @@ Orbit lets you download Hugging Face models, manage your local model cache, and 
 
 ## Installation
 
-Clone the repository:
+Orbit is distributed as a Python CLI application.
+
+Install [pipx](https://pipx.pypa.io/stable/), then install Orbit with:
 
 ```bash
-git clone https://github.com/adithyan-gireeshkumar/Orbit.git
-cd Orbit
+pipx install orbit-local
 ```
-
-Create and activate a virtual environment:
-
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
-```
-
-Install Orbit:
-
-```bash
-python -m pip install --upgrade pip
-python -m pip install -e .
-```
-
 ## Usage
 
 Download a model:
