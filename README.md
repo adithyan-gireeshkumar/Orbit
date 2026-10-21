@@ -1,6 +1,11 @@
 
 # Orbit 
 
+[![PyPI version](https://img.shields.io/pypi/v/orbit-local)](https://pypi.org/project/orbit-local/)
+[![Python versions](https://img.shields.io/pypi/pyversions/orbit-local)](https://pypi.org/project/orbit-local/)
+[![License](https://img.shields.io/pypi/l/orbit-local)](https://github.com/adithyan-gireeshkumar/Orbit/blob/main/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/adithyan-gireeshkumar/Orbit)](https://github.com/adithyan-gireeshkumar/Orbit/issues)
+
 A simple, open-source local AI model runner powered by Hugging Face Transformers.
 
 Orbit lets you download Hugging Face models, manage your local model cache, and run supported models directly on your computer.
