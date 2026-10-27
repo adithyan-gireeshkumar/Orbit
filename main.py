@@ -1,8 +1,7 @@
 import argparse
 import torch
 from transformers import pipeline
-from huggingface_hub import scan_cache_dir
-from huggingface_hub import snapshot_download
+from huggingface_hub import HfApi, scan_cache_dir, snapshot_download
 
 def run_model(model_id):
     print(f"Loading model : {model_id}..")
@@ -87,6 +86,7 @@ def pull_model(model_id):
         print(f"\nDownload failed: {error}")
 
 def main():
+    
     parser = argparse.ArgumentParser(prog="orbit")
     subparsers = parser.add_subparsers(
         dest="command",
@@ -112,7 +112,11 @@ def main():
     pull_parser.add_argument(
         "model_id",
         help="Hugging Face model repository ID",
-    )
+    pull_parser.add_argument(
+    "model_id",
+    help="Hugging Face model repository ID",
+)
+args = parser.parse_args())
     args = parser.parse_args()
 
     if args.command == "run":
