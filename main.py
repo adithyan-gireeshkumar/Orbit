@@ -15,6 +15,7 @@ def run_model(model_id):
         device=device
     )
     print("Orbit is ready. Type 'exit' to quit.")
+    conversation = []
 
     while True:
         prompt = input("You: ").strip()
@@ -26,12 +27,13 @@ def run_model(model_id):
             continue
 
         if getattr(ai.tokenizer, "chat_template", None):
-            messages = [
-                {"role": "user", "content": prompt}
-            ]
+            conversation.append({
+                "role": "user",
+                "content": prompt,
+            })
 
             result = ai(
-                messages,
+                conversation,
                 max_new_tokens=200,
             )
 
@@ -39,8 +41,14 @@ def run_model(model_id):
 
             if isinstance(generated, list):
                 answer = generated[-1]["content"]
+                conversation = generated
             else:
                 answer = str(generated)
+                conversation.append({
+                    "role": "assistant",
+                    "content": answer,
+                })
+
         else:
             result = ai(
                 prompt,
@@ -49,6 +57,7 @@ def run_model(model_id):
             )
 
             answer = result[0]["generated_text"]
+
 
         print(f"\nOrbit: {answer}\n")
 def list_models():
