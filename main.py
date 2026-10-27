@@ -112,11 +112,7 @@ def main():
     pull_parser.add_argument(
         "model_id",
         help="Hugging Face model repository ID",
-    pull_parser.add_argument(
-    "model_id",
-    help="Hugging Face model repository ID",
-)
-args = parser.parse_args())
+    )
     args = parser.parse_args()
 
     if args.command == "run":
