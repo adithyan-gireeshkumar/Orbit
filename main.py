@@ -25,16 +25,31 @@ def run_model(model_id):
         if not prompt:
             continue
 
-        messages = [
-            {"role": "user", "content": prompt}
-        ]
+        if getattr(ai.tokenizer, "chat_template", None):
+            messages = [
+                {"role": "user", "content": prompt}
+            ]
 
-        result = ai(
-            messages,
-            max_new_tokens=200,
-        )
+            result = ai(
+                messages,
+                max_new_tokens=200,
+            )
 
-        answer = result[0]["generated_text"][-1]["content"]
+            generated = result[0]["generated_text"]
+
+            if isinstance(generated, list):
+                answer = generated[-1]["content"]
+            else:
+                answer = str(generated)
+        else:
+            result = ai(
+                prompt,
+                max_new_tokens=200,
+                return_full_text=False,
+            )
+
+            answer = result[0]["generated_text"]
+
         print(f"\nOrbit: {answer}\n")
 def list_models():
     cache = scan_cache_dir()
